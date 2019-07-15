@@ -1,0 +1,12 @@
+.main-container {
+  height: 100%;
+  width: 100%;
+  background: teal;
+  /* padding: 3em; */
+  margin-top:2em;
+  text-align: center;
+}
+
+#canvas{
+  height: 100%;
+}

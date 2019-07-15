@@ -1,0 +1,11 @@
+[
+  {
+    "label":"Task Description",
+    "name":"taskDescription",
+    "type":"text",
+    "maxLength": 100,
+    "default":"Use the alphabets below to guess the word, or click the hint to get a clue.",
+    "description":"A guide telling the user how to solve this task.",
+    "importance":"high"
+  }
+]

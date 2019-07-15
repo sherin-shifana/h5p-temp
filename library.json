@@ -1,0 +1,24 @@
+{
+  "title": "Reaction Time Game",
+  "description": "Test your users by making them select the correct words from a text.",
+  "majorVersion": 1,
+  "minorVersion": 0,
+  "patchVersion": 0,
+  "runnable": 1,
+  "embedTypes": [
+    "iframe"
+  ],
+  "author": "Joubel",
+  "license": "MIT",
+  "machineName": "H5P.ReactionTimeGame",
+  "preloadedCss": [
+    {
+      "path": "css/h5p-reaction-time-game.css"
+    }
+  ],
+  "preloadedJs": [
+    {
+      "path": "js/h5p-reaction-time-game.js"
+    }
+  ]
+}
