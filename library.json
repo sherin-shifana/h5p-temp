@@ -11,6 +11,13 @@
   "author": "Joubel",
   "license": "MIT",
   "machineName": "H5P.ReactionTimeGame",
+  "preloadedDependencies":[
+          {
+              "machineName":"H5P.JoubelUI",
+              "majorVersion":1,
+              "minorVersion":3
+          }
+   ],
   "preloadedCss": [
     {
       "path": "css/h5p-reaction-time-game.css"
@@ -19,6 +26,13 @@
   "preloadedJs": [
     {
       "path": "js/h5p-reaction-time-game.js"
+    }
+  ],
+  "editorDependencies": [
+    {
+      "machineName": "H5PEditor.ColorSelector",
+      "majorVersion":"1",
+      "minorVersion":"2"
     }
   ]
 }

@@ -4,8 +4,29 @@
     "name":"taskDescription",
     "type":"text",
     "maxLength": 100,
-    "default":"Use the alphabets below to guess the word, or click the hint to get a clue.",
+    "default":"Click on the shape as per the instruction given below.",
     "description":"A guide telling the user how to solve this task.",
     "importance":"high"
+  },
+  {
+    "label":"Shape",
+    "name":"shape",
+    "type":"text",
+    "maxLength": 20,
+    "description":"Shape to be selected",
+    "importance":"high"
+  },
+  {
+    "label":"Color Selector",
+    "name":"color",
+    "type":"select",
+    "widget": "colorSelector",
+    "spectrum": {
+      "showPalette": true,
+      "palette": [
+            ["black", "red", "green"],
+            ["blue","yellow"]
+        ]
+    }
   }
 ]
