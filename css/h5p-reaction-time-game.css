@@ -32,3 +32,9 @@
 	position:relative;
 	top:1px;
 }
+
+.reaction-time-game .wrapper #canvas {
+  text-align: center;
+  border-radius: .5em;
+  border:1px solid grey;
+}
