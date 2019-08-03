@@ -11,22 +11,45 @@
   {
     "label":"Shape",
     "name":"shape",
-    "type":"text",
-    "maxLength": 20,
-    "description":"Shape to be selected",
-    "importance":"high"
+    "type": "select",
+    "alignment": "horizontal",
+    "widget": "radioGroup",
+    "options": [
+      {
+        "value": "circle",
+        "label": "Circle"
+      },
+      {
+        "value": "square",
+        "label": "Square"
+      },
+      {
+        "value": "triangle",
+        "label": "Triangle"
+      }
+    ],
+    "default": "circle"
   },
   {
-    "label":"Color Selector",
+    "label":"Color",
     "name":"color",
-    "type":"select",
-    "widget": "colorSelector",
-    "spectrum": {
-      "showPalette": true,
-      "palette": [
-            ["black", "red", "green"],
-            ["blue","yellow"]
-        ]
-    }
+    "type": "select",
+    "alignment": "horizontal",
+    "widget": "radioGroup",
+    "options": [
+      {
+        "value": "red",
+        "label": "Red"
+      },
+      {
+        "value": "green",
+        "label": "Green"
+      },
+      {
+        "value": "blue",
+        "label": "Blue"
+      }
+    ],
+    "default": "green"
   }
 ]

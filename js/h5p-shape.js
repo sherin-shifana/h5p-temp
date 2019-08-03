@@ -3,10 +3,8 @@
   ReactionTimeGame.Shape = function (shape, color) {
     this.shape = shape;
     this.color = color;
-    // this.occurance = 15;
-    // this.currentState = 15;
+    this.count = 15;
     this.canvasSize = 100;
-    console.log(this.shape, this.color);
   };
 
   ReactionTimeGame.Shape.prototype.appendTo = function ($container, cSize) {
@@ -19,7 +17,10 @@
 
   ReactionTimeGame.Shape.prototype.drawNext = function () {
     this.draw();
-    // this.currentState--;
+  };
+
+  ReactionTimeGame.Shape.prototype.decrement = function () {
+    this.count--;
   };
 
   ReactionTimeGame.Shape.prototype.prepareCanvas = function () {
@@ -39,7 +40,7 @@
     const context = this.canvas.getContext('2d');
     context.strokeStyle = color;
     context.fillStyle = color;
-    // context.lineWidth = lineWidth;
+
     context.beginPath();
     switch(shape) {
       case 'triangle':
@@ -66,17 +67,17 @@
     const that = this;
     switch (this.shape) {
       case 'triangle':
-      //frame1
+      // triangle
         that.drawShape(this.unitWt*3,this.unitHt*1.5,this.color,this.shape,0,this.height/3,this.height/3);
         break;
 
       case 'square':
-      // frame2
+      // square
         that.drawShape(this.unitWt*2,this.unitHt*1.5,this.color,this.shape,0,this.height/3,this.height/3);
         break;
 
       case 'circle':
-      //frame3
+      // circle
         that.drawShape(this.unitWt*3,this.unitHt/1.5,this.color,this.shape,this.radius,0,0);
         break;
       }
@@ -88,24 +89,6 @@
     this.width = this.canvas.width;
     context.clearRect(0, 0, canvas.width, canvas.height);
   };
-  /**
-  * If the selected level is less then 10, then draw initial parts
-  */
-  // ReactionTimeGame.Shape.prototype.drawFirst = function () {
-  //   this.currentState = 10;
-  //   while (this.currentState > this.numParts) {
-  //     this.drawNext();
-  //   }
-  // };
-
-  /**
-  *
-  */
-  // ReactionTimeGame.Shape.prototype.redraw = function (attemptsLeft) {
-  //   while (this.currentState > attemptsLeft) {
-  //     this.drawNext();
-  //   }
-  // };
 
   return ReactionTimeGame.Shape;
 })(H5P.jQuery,H5P.ReactionTimeGame);

@@ -11,11 +11,16 @@ H5P.ReactionTimeGame = (function ($, UI) {
     const that = this;
     this.colors = ["red", "green", "blue", "black", "yellow"];
     this.shapes = ["triangle", "circle", "square"];
+    this.correctColor = [];
+    this.correctShape = [];
+    this.colorArray = [];
+    this.colorArray = [];
+    this.count = 15;
 
     for (let i = 0; i < this.colors.length; i++) {
       this.randomColor = this.colors[Math.floor(Math.random() * this.colors.length)];
     }
-    
+
     for(let i=0; i<this.shapes.length; i++) {
       this.randomShape = this.shapes[Math.floor(Math.random() * this.shapes.length)];
     }
@@ -24,7 +29,9 @@ H5P.ReactionTimeGame = (function ($, UI) {
     this.createdTime = Date.now();
     this.shape.appendTo(that.$wrapper, this.canvasSize);
     this.shape.$canvas.click(function(){
-      that.afterClickShape();
+      if((that.selColor === that.randomColor) && (that.selShape === that.randomShape)) {
+        that.afterClickShape();
+      }
     });
   };
 
@@ -35,21 +42,36 @@ H5P.ReactionTimeGame = (function ($, UI) {
     return this.reactionTime;
   };
 
+  ReactionTimeGame.prototype.createFinalScreen = function () {
+    const that = this;
+    that.$wrapper.empty();
+    $('<div class="message"><h1>Game Over!</h1></div>').appendTo(that.$wrapper);
+    $('<div class="average-time">Average Reaction Time :&nbsp;</div>').appendTo(that.$wrapper);
+    $('<div class="feedback">Feedback : &nbsp</div>').appendTo(that.$wrapper);
+  };
+
   ReactionTimeGame.prototype.startGame = function () {
     const that = this;
-    this.number = 15;
     this.canvasSize = window.innerWidth/3.5 ;
+    let x = 1;
     that.getShape();
-
-    let x = 0;
-    setInterval(function(){
+    // if((that.selColor === that.randomColor) && (that.selShape === that.randomShape)) {
+    let a = setInterval(function(){
+      x++;
       that.getShape();
-      $('<div class="reaction-time">Reaction Time &nbsp; :&nbsp;'+that.reactionTime+'</div>').appendTo(that.$wrapper);
-      // if (++x === 5) {
-      //  clearInterval(a);
+      $('<div class="reaction-time">Reaction Time &nbsp; :&nbsp;</div>').appendTo(that.$wrapper);
+      if(that.reactionTime){
+        $(".reaction-time").append(that.reactionTime);
+      }
+      // if(x>15) {
+      //   stopInerval();
       // }
     },2000);
 
+    // function stopInerval() {
+    //   clearInterval(a);
+    //   that.createFinalScreen();
+    // }
 
   };
 
@@ -57,6 +79,7 @@ H5P.ReactionTimeGame = (function ($, UI) {
     const that=this;
     this.selShape = this.options.shape;
     this.selColor = this.options.color;
+    console.log(this.selColor,this.selShape);
     $container.addClass('reaction-time-game');
     this.$wrapper = $('<div class="wrapper"></div>');
     const $shape = $('<p>Shape:&nbsp;'+this.selShape+'</p>');
