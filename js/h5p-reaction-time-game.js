@@ -1,11 +1,63 @@
 H5P.ReactionTimeGame = (function ($, UI) {
 
   function ReactionTimeGame(options, id) {
+    $('head').append('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">');
     const that = this;
     that.options = options;
     // Keep provided id.
     that.id = id;
   }
+
+  ReactionTimeGame.prototype.attach = function ($container) {
+    const that = this;
+    this.count = 0;
+    this.introPage = new that.createIntroPage($container);
+    // this.gamePage = new that.createGamePage(that.options,that.id);
+
+    if (this.$container === undefined) {
+        this.$container = $container;
+        that.addFont();
+        this.$container.addClass('h5p-reaction-game');
+        this.introPage.appendTo(this.$container);
+        console.log(this.introPage.$introPage.on());
+        this.introPage.$introPage.on('start-game', function() {
+          $(this).remove();
+          that.createGamePage(that.$container);
+        });
+
+        this.trigger('resize');
+    }
+  };
+
+  ReactionTimeGame.prototype.startGame = function ($container) {
+    const that = this;
+    this.$wrapper = $container;
+    this.canvasSize = window.innerWidth/3.5 ;
+    this.answerNum = Math.floor(Math.random() * (4) + 3);
+    this.correctColor = [];
+    this.correctShape = [];
+    this.colorArray = [];
+    this.shapeArray = [];
+    this.reactionTimes = [];
+    let x = 0;
+    for(let i=(this.correctColor.length+this.colorArray.length); i <15; i++) {
+      that.createShapeArray();
+    }
+    
+    let interval = setInterval(function(){
+      x++;
+      that.getShape(x);
+
+      if(x === 14) {
+        stopInerval();
+      }
+    },2000);
+
+    function stopInerval() {
+      clearInterval(interval);
+      that.createFinalScreen();
+    }
+  };
 
   ReactionTimeGame.prototype.createShapeArray = function () {
     const that = this;
@@ -49,9 +101,9 @@ H5P.ReactionTimeGame = (function ($, UI) {
 
   ReactionTimeGame.prototype.getShape = function (x) {
     const that = this;
-    // console.log(this.shapes[x],this.colors[x]);
     this.shape = new ReactionTimeGame.Shape(this.shapes[x],this.colors[x]);
     this.createdTime = Date.now();
+    console.log(that.$wrapper);
     this.shape.appendTo(that.$wrapper, this.canvasSize);
     $('<div class="reaction-time">Reaction Time &nbsp; :&nbsp;</div>').appendTo(that.$wrapper);
     this.shape.$canvas.click(function(){
@@ -87,7 +139,7 @@ H5P.ReactionTimeGame = (function ($, UI) {
 
   ReactionTimeGame.prototype.createFinalScreen = function () {
     const that = this;
-    that.$wrapper.empty();
+    that.$wrapper.remove();
     $('<div class="message"><h1>Game Over!</h1></div>').appendTo(that.$wrapper);
     $('<div class="average-time">Average Reaction Time :&nbsp;'+that.avgTime+'</div>').appendTo(that.$wrapper);
     if(that.avgTime<=0.5) {
@@ -102,57 +154,87 @@ H5P.ReactionTimeGame = (function ($, UI) {
 
   };
 
-  ReactionTimeGame.prototype.startGame = function () {
-    const that = this;
-    this.canvasSize = window.innerWidth/3.5 ;
-    this.answerNum = Math.floor(Math.random() * (4) + 3);
-    this.correctColor = [];
-    this.correctShape = [];
-    this.colorArray = [];
-    this.shapeArray = [];
-    this.reactionTimes = [];
-    let x = 0;
-    while(this.correctColor.length+this.colorArray.length <15) {
-      that.createShapeArray();
-    }
+  ReactionTimeGame.prototype.addFont = function () {
+      window.WebFontConfig = {
+        google: { families: [ 'Lato::latin' ] }
+      };
 
-    let a = setInterval(function(){
-      x++;
-      that.getShape(x);
-
-      if(x === 14) {
-        stopInerval();
-      }
-    },2000);
-
-    function stopInerval() {
-      clearInterval(a);
-      that.createFinalScreen();
-    }
-
+      var wf = document.createElement('script');
+      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
   };
 
-  ReactionTimeGame.prototype.attach = function ($container) {
-    const that=this;
-    this.selShape = this.options.shape;
-    this.selColor = this.options.color;
-    console.log(this.selColor,this.selShape);
-    $container.addClass('reaction-time-game');
-    this.$wrapper = $('<div class="wrapper"></div>');
-    const $shape = $('<p>Shape:&nbsp;'+this.selShape+'</p>');
-    const $color = $('<p>Color:&nbsp'+this.selColor+'</p>');
-    const $taskDescription = $('<div class="task-description">'+this.options.taskDescription+'<br/></div>');
-    const $startButton = $('<button class="start-button">Start</button>');
-    $startButton.click(function(){
-      that.$wrapper.empty();
-      that.startGame();
+  ReactionTimeGame.prototype.createIntroPage = function () {
+    const that = this;
+    this.$introPage = $('<div>', {
+      'class': 'h5p-intro-page'
     });
-    $shape.appendTo($taskDescription);
-    $color.appendTo($taskDescription);
-    $taskDescription.appendTo(this.$wrapper);
-    $startButton.appendTo(this.$wrapper);
-    this.$wrapper.appendTo($container);
-  }
+
+    var $innerWrapper = $('<div>', {
+      'class': 'h5p-intro-page-inner'
+    });
+
+    $innerWrapper.append($('<div>', {
+      'class': 'h5p-intro-page-title'
+    }).append($('<span>', {
+      // html: text
+    })));
+
+    UI.createButton({
+      text: 'Start',
+      'class': 'mq-control-button',
+      click: function () {
+        // console.log($(this));
+        $(this).trigger('start-game');
+      }
+    }).appendTo($innerWrapper);
+
+    $innerWrapper.appendTo(this.$introPage);
+    that.appendTo = function ($container) {
+      this.$introPage.appendTo($container);
+    };
+
+    that.remove = function () {
+      this.$introPage.remove();
+    };
+  };
+
+  ReactionTimeGame.prototype.createGamePage = function ($container) {
+    const that = this;
+    that.sliding = false;
+    this.translations = this.options.userInterface;
+    that.$gamepage = $('<div>', {
+      'class': 'h5p-game'
+    });
+
+    that.$counterDiv = $('<div class="counting-down">5</div>');
+
+    that.score = 0;
+    that.$counterDiv.appendTo(that.$gamepage);
+    this.$gamepage.appendTo($container);
+    this.counter = new ReactionTimeGame.Counter(that.$counterDiv);
+
+    let a = setInterval(function() {
+      that.count++;
+      console.log(that.count);
+      that.counter.decrement();
+      if(that.count===5) {
+       that.counter.gameStart();
+      }
+      else if (that.count>5) {
+        removeInerval();
+      }
+    },1000);
+    function removeInerval() {
+      clearInterval(a);
+      that.counter.remove();
+      // console.log(that.$gamepage[0]);
+      that.startGame(that.$gamepage);
+    }
+  };
 
   return ReactionTimeGame;
 })(H5P.jQuery, H5P.JoubelUI);

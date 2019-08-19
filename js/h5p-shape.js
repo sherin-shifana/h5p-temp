@@ -9,8 +9,11 @@
 
   ReactionTimeGame.Shape.prototype.appendTo = function ($container, cSize) {
     this.canvasSize = cSize;
+    console.log(cSize);
+    console.log($container);
     $container.empty();
-    this.$canvas = $('<canvas id="canvas" height="'+cSize+'px" width="'+cSize+'px"></canvas>').appendTo($container);
+    this.$canvas = $('<canvas id="canvas" height="'+cSize+'px" width="'+cSize+'px"></canvas>');
+    this.$canvas.appendTo($container);
     this.prepareCanvas();
     this.drawNext();
   };

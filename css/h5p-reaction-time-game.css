@@ -1,40 +1,122 @@
-.reaction-time-game {
-  font-family: sans-serif;
-  margin: 0 auto;
-  height: auto;
-  min-height: 400px;
-  min-width: 298px;
-  overflow: auto !important;
+.h5p-reaction-game:empty, .h5p-reaction-game {
+  font-family: "Lato", sans-serif;
+  overflow: hidden;
+  background: #1394c7;
+  color: #fff;
+  font-size: 28px;
   text-align: center;
-  color: black;
+  display: table;
+  height: 50vh;
+  /* min-height: 50vh; */
+  width: 100%;
+}
+
+/* Intro page */
+.h5p-intro-page {
+  height: 100%;
+  min-height: 50vh;
+  display: table-cell;
   vertical-align: middle;
-}
-
-.start-button {
-	background-color:#276873;
-	-moz-border-radius:28px;
-	-webkit-border-radius:.1em;
-	border-radius:.4em;
-	border:1px solid #276873;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:17px;
-	padding:.5em;
-  width: 5em;
-	text-decoration:none;
-}
-.start-button:hover {
-	background-color:#599bb9;
-}
-.start-button:active {
-	position:relative;
-	top:1px;
-}
-
-.reaction-time-game .wrapper #canvas {
   text-align: center;
-  border-radius: .5em;
-  border:1px solid grey;
+  width: 100%;
+  /* position: absolute; */
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background: #1394c7;
 }
+.h5p-intro-page-inner {
+  position: relative;
+  height: 50vh;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.h5p-intro-page > .h5p-intro-page-title {
+  font-weight: bold;
+  line-height: 1.1;
+  font-size: 0.9em;
+  margin-bottom: 0.8em;
+}
+.h5p-intro-page > .h5p-intro-page-title > span {
+  display: inline-block;
+  max-width: 80%;
+}
+.h5p-joubelui-button.mq-control-button {
+  padding: 0.2em 2em;
+  background: #0072bb;
+  border: none; /* Reset borders */
+  border-bottom: 0.2em solid #014876;
+  margin-top: 4em;
+
+  transition: background-color 1s;
+}
+.h5p-joubelui-button:hover {
+  background-color: #005f9b;
+}
+
+.counting-down{
+  /* visibility: hidden; */
+  margin: 4em;
+  /* min-height: 300px;
+  height: 100%; */
+  color: white;
+}
+
+.h5p-game-started, .h5p-game {
+  height: 100%;
+  /* min-height: 50vh; */
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+  /* position: absolute; */
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background: #1394c7;
+}
+.h5p-countdown.current {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+.h5p-countdown-inner {
+  height: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.h5p-countdown-text {
+  position: relative;
+  z-index: 100;
+  font-size: 1.5em;
+  display: inline-block;
+  background: #0072bb;
+  min-width: 4em;
+  padding: .5em;
+  border: 0.2em solid #fff;
+}
+.h5p-countdown-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: #014876;
+
+  -webkit-transition: height 3s ease-in-out;
+  -moz-transition: height 3s ease-in-out;
+  -ms-transition: height 3s ease-in-out;
+  transition: height 3s ease-in-out;
+}
+.h5p-countdown-bg.fuel {
+  height: 100%;
+}
+
+.h5p-joubel-ui-slide {
+height: auto;
+}
+
+/* Hide statusbar on resultpage */
