@@ -4,7 +4,7 @@
     "name":"taskDescription",
     "type":"text",
     "maxLength": 100,
-    "default":"Click on the shape as per the instruction given below.",
+    "default":"Click on the shape as per the instruction.",
     "description":"A guide telling the user how to solve this task.",
     "importance":"high"
   },

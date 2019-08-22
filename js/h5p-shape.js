@@ -9,11 +9,14 @@
 
   ReactionTimeGame.Shape.prototype.appendTo = function ($container, cSize) {
     this.canvasSize = cSize;
-    console.log(cSize);
-    console.log($container);
     $container.empty();
+    this.$gameWrapper = $('<div class="game-wrapper"></div>');
     this.$canvas = $('<canvas id="canvas" height="'+cSize+'px" width="'+cSize+'px"></canvas>');
-    this.$canvas.appendTo($container);
+    this.$question = $('<div class="question"></div>');
+
+    this.$canvas.appendTo(this.$gameWrapper);
+    this.$question.appendTo(this.$gameWrapper);
+    this.$gameWrapper.appendTo($container)
     this.prepareCanvas();
     this.drawNext();
   };
