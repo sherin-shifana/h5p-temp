@@ -113,10 +113,14 @@ H5P.ReactionTimeGame = (function ($, UI) {
     for(let i=(this.correctColor.length+this.colorArray.length); i <this.totalAppearance; i++) {
       that.createShapeArray();
     }
+    console.log(that.correctColor);
+    console.log(that.correctShape);
+    console.log(that.colorArray);
+    console.log(that.shapeArray);
 
     this.interval = setInterval(function(){
-      x++;
       that.getShape(x);
+      x++;
     },2000);
 
   };
@@ -140,17 +144,18 @@ H5P.ReactionTimeGame = (function ($, UI) {
       }
     }
     else {
-      if (that.colorArray.length<=(that.totalAppearance-that.answerNum)) {
+      if (that.colorArray.length<(that.totalAppearance-that.answerNum)) {
         // if(that.colorArray[that.colorArray.length-1] !== this.randomColor) {
           that.colorArray.push(this.randomColor);
-        // }
-      }
-
-      if ((that.shapeArray.length<(that.totalAppearance-that.answerNum))) {
-        // if(that.shapeArray[that.shapeArray.length-1] !== this.randomShape) {
           that.shapeArray.push(this.randomShape);
         // }
       }
+
+      // if ((that.shapeArray.length<(that.totalAppearance-that.answerNum))) {
+      //   // if(that.shapeArray[that.shapeArray.length-1] !== this.randomShape) {
+      //     that.shapeArray.push(this.randomShape);
+      //   // }
+      // }
     }
 
     this.colors= that.colorArray.concat(this.correctColor);
@@ -168,12 +173,11 @@ H5P.ReactionTimeGame = (function ($, UI) {
     this.shape.appendTo(that.$wrapper, this.canvasSize);
     this.shape.$question.append("Question : "+that.selColor + " " + that.selShape);
     $('<div class="reaction-time">Reaction Time &nbsp; :&nbsp;</div>').appendTo(that.$wrapper);
-    // this.shape.$canvas.attr('aria-label','shape');
     this.shape.$canvas.click(function(){
       $(this).attr('aria-label','clicked');
       that.afterClickShape(x);
     });
-    if(x > this.totalAppearance) {
+    if(x === this.totalAppearance) {
       stopInerval();
     }
     function stopInerval() {
@@ -184,22 +188,22 @@ H5P.ReactionTimeGame = (function ($, UI) {
 
   ReactionTimeGame.prototype.afterClickShape = function (x) {
     const that=this;
-    // that.clickStatus = 0;
     that.shape.$canvas.off('click');
     if((that.selColor === that.colors[x]) && (that.selShape === that.shapes[x])) {
       that.correct++;
       this.clickedTime = Date.now();
       this.reactionTime = (this.clickedTime - this.createdTime)/1000;
-      if(this.reactionTime){
-        that.reactionTimes.push(this.reactionTime);
-        $(".reaction-time").append(this.reactionTime);
-      }
     }
     else {
+      this.reactionTime = 0;
       that.shape.$message.append("wrong attempt!!");
       that.wrong++;
     }
 
+    if(that.reactionTime){
+      that.reactionTimes.push(that.reactionTime);
+      $(".reaction-time").append(that.reactionTime);
+    }
     this.calculateAvgTime();
   };
 

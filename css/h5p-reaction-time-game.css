@@ -78,5 +78,8 @@
 .question, .message{
   margin: 0.5rem 0rem;
 }
+.message{
+  min-height:2em; 
+}
 
 /* Hide statusbar on resultpage */

@@ -15,10 +15,10 @@
     this.$message = $('<div class="message"></div>');
     this.$question = $('<div class="question"></div>');
 
-    this.$canvas.appendTo(this.$gameWrapper);
     this.$message.appendTo(this.$gameWrapper);
+    this.$canvas.appendTo(this.$gameWrapper);
     this.$question.appendTo(this.$gameWrapper);
-    this.$gameWrapper.appendTo($container)
+    this.$gameWrapper.appendTo($container);
     this.prepareCanvas();
     this.drawNext();
   };
