@@ -12,9 +12,11 @@
     $container.empty();
     this.$gameWrapper = $('<div class="game-wrapper"></div>');
     this.$canvas = $('<canvas id="canvas" height="'+cSize+'px" width="'+cSize+'px"></canvas>');
+    this.$message = $('<div class="message"></div>');
     this.$question = $('<div class="question"></div>');
 
     this.$canvas.appendTo(this.$gameWrapper);
+    this.$message.appendTo(this.$gameWrapper);
     this.$question.appendTo(this.$gameWrapper);
     this.$gameWrapper.appendTo($container)
     this.prepareCanvas();

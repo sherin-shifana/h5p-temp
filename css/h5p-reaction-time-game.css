@@ -3,10 +3,10 @@
   overflow: hidden;
   background: #1394c7;
   color: #fff;
-  font-size: 28px;
+  font-size: 1.5em;
   text-align: center;
   display: table;
-  height: 70vh;
+  height: 90vh;
   width: 100%;
   text-transform: capitalize;
 }
@@ -14,7 +14,7 @@
 /* Intro page */
 .h5p-intro-page {
   height: 100%;
-  min-height: 50vh;
+  min-height: 90vh;
   display: table-cell;
   vertical-align: middle;
   text-align: center;
@@ -36,7 +36,7 @@
 .h5p-intro-page > .h5p-intro-page-title {
   font-weight: bold;
   line-height: 1.1;
-  font-size: 0.9em;
+  /* font-size: 0.9; */
   margin-bottom: 0.8em;
 }
 .h5p-intro-page > .h5p-intro-page-title > span {
@@ -48,8 +48,6 @@
   background: #0072bb;
   border: none; /* Reset borders */
   border-bottom: 0.2em solid #014876;
-  margin-top: 3em;
-
   transition: background-color 1s;
 }
 .h5p-joubelui-button:hover {
@@ -67,17 +65,18 @@
 
 .h5p-game-started, .h5p-game {
   height: 100%;
-  /* min-height: 50vh; */
   display: table-cell;
   vertical-align: middle;
   text-align: center;
   width: 100%;
-  /* position: absolute; */
   z-index: 1;
   top: 0;
   left: 0;
   background: #1394c7;
 }
 
+.question, .message{
+  margin: 0.5rem 0rem;
+}
 
 /* Hide statusbar on resultpage */

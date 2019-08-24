@@ -15,13 +15,11 @@ H5P.ReactionTimeGame = (function ($, UI) {
     this.taskDescription = this.options.taskDescription;
     this.count = 0;
     this.introPage = new that.createIntroPage($container);
-    // this.gamePage = new that.createGamePage(that.options,that.id);
 
     if (this.$container === undefined) {
         this.$container = $container;
         this.$container.addClass('h5p-reaction-game');
         this.introPage.appendTo(this.$container);
-        // console.log(this.introPage.$introPage.on());
         this.introPage.$introPage.on('start-game', function() {
           $(this).remove();
           that.createGamePage(that.$container);
@@ -43,15 +41,12 @@ H5P.ReactionTimeGame = (function ($, UI) {
 
     $innerWrapper.append($('<div>', {
       'class': 'h5p-intro-page-title'
-    }).append($('<span>', {
-      // html: text
-    })));
+    }).append($('<span>')));
 
     UI.createButton({
       text: 'Start',
       'class': 'mq-control-button',
       click: function () {
-        // console.log($(this));
         $(this).trigger('start-game');
       }
     }).appendTo($innerWrapper);
@@ -83,7 +78,6 @@ H5P.ReactionTimeGame = (function ($, UI) {
 
     let a = setInterval(function() {
       that.count++;
-      // console.log(that.count);
       that.counter.decrement();
       if(that.count===5) {
        that.counter.gameStart();
@@ -95,7 +89,6 @@ H5P.ReactionTimeGame = (function ($, UI) {
     function removeInerval() {
       clearInterval(a);
       that.counter.remove();
-      // console.log(that.$gamepage[0]);
       that.startGame(that.$gamepage);
     }
   };
@@ -119,7 +112,6 @@ H5P.ReactionTimeGame = (function ($, UI) {
     let x = 0;
     for(let i=(this.correctColor.length+this.colorArray.length); i <this.totalAppearance; i++) {
       that.createShapeArray();
-
     }
 
     this.interval = setInterval(function(){
@@ -148,16 +140,16 @@ H5P.ReactionTimeGame = (function ($, UI) {
       }
     }
     else {
-      if (that.colorArray.length<(that.totalAppearance-that.answerNum)) {
-        if(that.colorArray[that.colorArray.length-1] !== this.randomColor) {
+      if (that.colorArray.length<=(that.totalAppearance-that.answerNum)) {
+        // if(that.colorArray[that.colorArray.length-1] !== this.randomColor) {
           that.colorArray.push(this.randomColor);
-        }
+        // }
       }
 
       if ((that.shapeArray.length<(that.totalAppearance-that.answerNum))) {
-        if(that.shapeArray[that.shapeArray.length-1] !== this.randomShape) {
+        // if(that.shapeArray[that.shapeArray.length-1] !== this.randomShape) {
           that.shapeArray.push(this.randomShape);
-        }
+        // }
       }
     }
 
@@ -174,17 +166,14 @@ H5P.ReactionTimeGame = (function ($, UI) {
 
     that.$questionDiv.appendTo(that.$wrapper);
     this.shape.appendTo(that.$wrapper, this.canvasSize);
-    this.shape.$question.append(that.selColor + " " + that.selShape);
+    this.shape.$question.append("Question : "+that.selColor + " " + that.selShape);
     $('<div class="reaction-time">Reaction Time &nbsp; :&nbsp;</div>').appendTo(that.$wrapper);
-
     // this.shape.$canvas.attr('aria-label','shape');
     this.shape.$canvas.click(function(){
       $(this).attr('aria-label','clicked');
-      // console.log($(this).attr('aria-label'));
       that.afterClickShape(x);
     });
-    // console.log(x, this.totalAppearance);
-    if(x === this.totalAppearance) {
+    if(x > this.totalAppearance) {
       stopInerval();
     }
     function stopInerval() {
@@ -207,7 +196,7 @@ H5P.ReactionTimeGame = (function ($, UI) {
       }
     }
     else {
-      that.shape.$gameWrapper.append("oohoo!! wrong attempt");
+      that.shape.$message.append("wrong attempt!!");
       that.wrong++;
     }
 
@@ -234,13 +223,13 @@ H5P.ReactionTimeGame = (function ($, UI) {
     }
     this.missed = (that.totalAppearance - that.correct - that.wrong);
     if(that.avgTime<=0.5 && that.avgTime>0) {
-      $('<h1 class="feedback">Good!!</h1>').appendTo(that.$wrapper);
+      $('<h3 class="feedback">Good!!</h3>').appendTo(that.$wrapper);
     }
     else if ((that.avgTime<1)&&(that.avgTime>0.5)) {
-      $('<h1 class="feedback">Need to improve!!</h1>').appendTo(that.$wrapper);
+      $('<h3 class="feedback">Need to improve!!</h3>').appendTo(that.$wrapper);
     }
     else {
-      $('<h1 class="feedback">Very Bad!! Are you sleeping??</h1>').appendTo(that.$wrapper);
+      $('<h3 class="feedback">Very Bad!! Are you sleeping??</h3>').appendTo(that.$wrapper);
     }
     $('<p class="average-time">Average Reaction Time :&nbsp;'+that.avgTime+'</p>').appendTo(that.$wrapper);
     $('<p class="correct-attempts">Correct Attempts :&nbsp;'+that.correct+'</p>').appendTo(that.$wrapper);
