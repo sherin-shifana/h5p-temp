@@ -117,6 +117,8 @@ H5P.ReactionTimeGame = (function ($, UI) {
     console.log(that.correctShape);
     console.log(that.colorArray);
     console.log(that.shapeArray);
+    console.log(that.colors);
+    console.log(that.shapes);
 
     this.interval = setInterval(function(){
       that.getShape(x);
@@ -127,7 +129,7 @@ H5P.ReactionTimeGame = (function ($, UI) {
 
   ReactionTimeGame.prototype.createShapeArray = function () {
     const that = this;
-    let colors = ["red", "green", "blue", "black", "yellow"];
+    let colors = ["red", "green", "blue", "yellow"];
     let shapes = ["triangle", "circle", "square"];
     for (let i = 0; i < colors.length; i++) {
       this.randomColor = colors[Math.floor(Math.random() * colors.length)];
@@ -137,13 +139,11 @@ H5P.ReactionTimeGame = (function ($, UI) {
       this.randomShape = shapes[Math.floor(Math.random() * shapes.length)];
     }
 
-    if ((that.selColor === that.randomColor) && (that.selShape === that.randomShape)) {
+
       for (let i=that.correctColor.length; i<that.answerNum;i++) {
-        that.correctColor.push(this.randomColor);
-        that.correctShape.push(this.randomShape);
+        that.correctColor.push(this.selColor);
+        that.correctShape.push(this.selShape);
       }
-    }
-    else {
       if (that.colorArray.length<(that.totalAppearance-that.answerNum)) {
         // if(that.colorArray[that.colorArray.length-1] !== this.randomColor) {
           that.colorArray.push(this.randomColor);
@@ -156,7 +156,6 @@ H5P.ReactionTimeGame = (function ($, UI) {
       //     that.shapeArray.push(this.randomShape);
       //   // }
       // }
-    }
 
     this.colors= that.colorArray.concat(this.correctColor);
     this.shapes= that.shapeArray.concat(this.correctShape);

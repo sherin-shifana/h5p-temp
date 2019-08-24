@@ -1,7 +1,7 @@
 .h5p-reaction-game:empty, .h5p-reaction-game {
   font-family: "Raleway", serif;
   overflow: hidden;
-  background: #1394c7;
+  background: #149cd2;
   color: #fff;
   font-size: 1.5em;
   text-align: center;
@@ -23,7 +23,7 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background: #1394c7;
+  background: #149cd2;
 }
 .h5p-intro-page-inner {
   position: relative;
@@ -72,14 +72,14 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background: #1394c7;
+  background: #149cd2;
 }
 
 .question, .message{
   margin: 0.5rem 0rem;
 }
 .message{
-  min-height:2em; 
+  min-height:2em;
 }
 
 /* Hide statusbar on resultpage */
