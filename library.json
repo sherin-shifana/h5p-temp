@@ -3,7 +3,7 @@
   "description": "Test your users by making them select the correct words from a text.",
   "majorVersion": 1,
   "minorVersion": 0,
-  "patchVersion": 0,
+  "patchVersion": 1,
   "runnable": 1,
   "embedTypes": [
     "iframe"
@@ -21,6 +21,12 @@
                       "machineName": "H5P.Question",
                       "majorVersion": 1,
                       "minorVersion": 4
+                },
+
+                {
+                  "machineName": "H5P.Timer",
+                  "majorVersion": 0,
+                  "minorVersion": 4
                 }
 
    ],
@@ -34,7 +40,10 @@
       "path": "js/h5p-reaction-time-game.js"
     },
     {
-      "path": "js/h5p-shape.js"
+      "path": "js/h5p-reaction-time-shape.js"
+    },
+    {
+      "path": "js/h5p-reaction-time-timer.js"
     }
   ],
   "editorDependencies": [
